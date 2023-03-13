@@ -1,0 +1,32 @@
+{% load static %}
+{% load book_tags %}
+<section id="book-section">
+    <h1>Books</h1>
+    <div id="books">
+        {% for book in books %}
+            <div class="book card">
+                <img class="book-img" src="{{book.cover_image.url}}">
+                <h3 class="book-title">{{book.title}}</h3>
+                <p class="book-genre"><span class="bold">Genre:</span> {{book.genre|capitalize_all:" "}}</p>
+                <p class="book-description">
+                    {% if book.description|length >= 100 %}
+                        {{book.description|slice:"100"}}...<a href="{% url 'book_page' book_id=book.book_id %}">Read more</a>
+                    {% else %}s
+                        {{book.description}}
+                    {% endif %}
+                </p>
+                <div class="book-footer">
+                    {% with index=forloop.counter0 %}
+                        <span class="book-rating color-gray">Rating: {{ratings|element_at:index }}</span>
+                    {% endwith %}
+                    {% if perms.main.delete_post %}
+                        <div class="book-btns">
+                            <a href="{% url 'delete_book' book_id=book.book_id %}" class="trash-btn">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+</section>

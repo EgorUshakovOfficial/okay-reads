@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-section">
+    <h1 class="form-title">Sign in</h1>
+    {% include 'messages.html' %}
+    <form action="/login" method="POST" class="form">
+        {% csrf_token %}
+        <div class="form-controller">
+            <label id="label_username" for="id_username">{{form.username.label}}</label>
+            {{form.username}}
+        </div>
+        <div class="form-controller">
+            <label id="label_password" for="id_password1">{{form.password1.label}}</label>
+            {{form.password1}}
+        </div>
+        <button class="submit-btn" type="submit">Sign in</button>
+    </form>
+</div>
+{% endblock %}

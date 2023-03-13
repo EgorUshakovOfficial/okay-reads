@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-section">
+    <h1 class="form-title">Add new book</h1>
+    <form action="{% url 'add_book' %}" method="POST" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-controller">
+            <label id="id_title_label" for="id_title">{{form.title.label}}</label>
+            {{form.title}}
+        </div>
+        <div class="form-controller">
+            <label id="id_cover_image_label" for="id_cover_image">{{form.cover_image.label}}</label>
+            {{form.cover_image}}
+        </div>
+        <div class="form-controller">
+            <label id="id_author_label" for="id_author">{{form.author.label}}</label>
+            {{form.author}}
+        </div>
+        <div class="form-controller">
+            <label for="id_description_label" for="id_description">{{form.description.label}}</label>
+            {{form.description}}
+        </div>
+        <div class="form-controller">
+            <label for="id_genre_label" for="id_genre">{{form.genre.label}}</label>
+            {{form.genre}}
+        </div>
+        <div class="form-controller">
+            <label for="id_publication_date_label" id="id_publication_date">{{form.publication_date.label}}</label>
+            {{form.publication_date}}
+        </div>
+        <button class="submit-btn" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

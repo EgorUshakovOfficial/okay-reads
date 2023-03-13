@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load book_tags %}
+{% block content %}
+<article id="book-page">
+    <header id="book-page-header">
+        <h1 class="book-page-title">{{book.title}}</h1>
+        <p class="italic"><span class="bold">Author:</span> {{book.author}}</p>
+        <p class="italic"><span class="bold">Published at:</span> {{book.publication_date}}</p>
+    </header>
+    <section id="book-page-content">
+        <img src="{{book.cover_image.url}}">
+        <p class="book-description">{{book.description}}</p>
+    </section>
+    <section id="reviews-section">
+        <h2>Reviews</h2>
+        <form id="review-form" class="card" action="{% url 'book_page' book_id=book.book_id %}" method="POST">
+            {% csrf_token %}
+            <div class="review-author">
+                <img src="{% static 'assets/profile-avatar.png' %}">
+                <p class="bold">{{request.user.first_name}} {{request.user.last_name|first}}</p>
+            </div>
+            <p class="italic color-gray">If you read this book, please let us know your thoughts on it</p>
+            <div id="review-form-inputs">
+                <div class="form-controller">
+                    <label id="id_title_label" for="id_title">{{form.title.label}}</label>
+                    {{form.title}}
+                </div>
+                <div class="form-controller">
+                    <label id="id_comment_label" for="id_comment">{{form.comment.label}}</label>
+                    {{form.comment}}
+                </div>
+                <div class="form-controller">
+                    <label id="id_rating_label" for="id_rating">{{form.rating.label}}</label>
+                    {{form.rating}}
+                </div>
+            </div>
+            <button id="submit" class="submit-btn">Submit</button>
+        </form>
+        {% if reviews|length == 0 %}
+        <p>No reviews exist for this book</p>
+        {% else %}
+            <div id="reviews">
+                {% for review in reviews %}
+                    <div class="review card">
+                        <div class="review-author">
+                            <img src="{% static 'assets/profile-avatar.png' %}">
+                            <p class="bold">{{review.author|partial_name}}</p>
+                        </div>
+                        <div class="review-content">
+                            <h3 class="review-title">{{review.title}}</h3>
+                            <p>{{review.comment}}</p>
+                            <p class="color-gray">Rating: {{review.rating}}/5</p>
+                        </div>
+                    </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}

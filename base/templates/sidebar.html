@@ -1,0 +1,23 @@
+<div id="sidebar">
+    <div id="search-books">
+        <h2>Search and browse books</h2>
+        <form action="{% url 'index' %}" method="GET" id="search-form" onsubmit="searchFormOnSubmit(event)">
+            <input type="text" name="query" placeholder="Search for book" id="search">
+            <button id="search-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+    <div id="genres">
+        <h2>Genres</h2>
+        <ul id="genre-topics">
+            {% for genre in genres %}
+                {% with genre_name=genre|last genre_value=genre|first %}
+                <li>
+                    <a href="{% url 'index' %}?query={{query}}&genre={{genre_value}}">
+                        {{genre_name}}
+                    </a>
+                </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
