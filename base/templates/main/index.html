@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'main/sidebar.html' with genres=genres query=query %}
+{% include 'book/books.html' with books=books ratings=ratings %}
+{% endblock %}
+

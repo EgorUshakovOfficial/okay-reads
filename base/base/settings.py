@@ -30,10 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
-    'author',
-    'book',
-    'main',
-    'users',
+    'apps.author',
+    'apps.book',
+    'apps.main',
+    'apps.users',
     'storages'
 ]
 
@@ -54,9 +54,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'templates',
-            BASE_DIR / 'main/templates',
-            BASE_DIR / 'book/templates/book',
-            BASE_DIR / 'auth/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {

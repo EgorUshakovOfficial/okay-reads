@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-section">
+    <h1 class="form-title">Registration</h1>
+    {% include 'includes/messages.html' %}
+    <form action="/register" method="POST" class="form">
+        {% csrf_token %}
+        <div class="form-controller">
+            <label id="label_email" for="id_email">{{form.email.label}}</label>
+            {{form.email}}
+        </div>
+        <div class="form-controller">
+            <label id="label_first_name" for="id_first_name">{{form.first_name.label}}</label>
+            {{form.first_name}}
+        </div>
+        <div class="form-controller">
+            <label id="label_last_name" for="id_last_name">{{form.last_name.label}}</label>
+            {{form.last_name}}
+        </div>
+        <div class="form-controller">
+            <label id="label_username" for="id_username">{{form.username.label}}</label>
+            {{form.username}}
+        </div>
+        <div class="form-controller">
+            <label id="label_password1" for="id_password1">{{form.password1.label}}</label>
+            {{form.password1}}
+        </div>
+        <div class="form-controller">
+            <label id="label_password2" for="id_password2">{{form.password2.label}}</label>
+            {{form.password2}}
+        </div>
+        <button type="submit" class="submit-btn">Sign up</button>
+    </form>
+</div>
+{% endblock %}
